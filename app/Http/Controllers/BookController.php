@@ -20,21 +20,6 @@ class BookController extends Controller
         return new BookResourceCollection($books);
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function search($keyword)
-    {
-        $criteria = Book::select('*')
-            ->where('title', 'LIKE', "%" . $keyword . "%")
-            ->orderBy('views', 'DESC')
-            ->get();
-        return new BookResourceCollection($criteria);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -64,12 +49,6 @@ class BookController extends Controller
             ->setStatusCode(201);
     }
 
-    public function slug($slug)
-    {
-        $criteria = Book::where('slug', $slug)->first();
-        return new BookResource($criteria);
-    }
-
     /**
      * Display the specified resource.
      *
@@ -78,7 +57,8 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        return new BookResource(Book::findOrFail($id));
+        $book = Book::findOrFail($id);
+        return new BookResource($book);
     }
 
     /**
