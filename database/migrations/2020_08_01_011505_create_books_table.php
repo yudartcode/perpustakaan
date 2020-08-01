@@ -20,7 +20,6 @@ class CreateBooksTable extends Migration
             $table->text('description')->nullable();
             $table->string('author')->nullable();
             $table->string('publisher')->nullable();
-            $table->string('cover')->nullable();
             $table->float('weight')->unsigned()->default(0);
             $table->integer('views')->unsigned()->default(0);
             $table->enum('status', ['AVAILABLE', 'BORROWED'])->default('AVAILABLE');
