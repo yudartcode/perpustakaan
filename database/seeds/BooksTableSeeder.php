@@ -13,13 +13,13 @@ class BooksTableSeeder extends Seeder
     public function run()
     {
         $books = [];
-        for ($i = 0; $i < 15; $i++) {
-            $title = 'Buku Laravel API v'. $i+1;
+        for ($i = 1; $i <= 15; $i++) {
+            $title = 'Buku Laravel API v'. $i;
             $slug = str_replace(' ', '-', strtolower($title));
             $books[$i] = [
                 'title' => $title,
                 'slug' => $slug,
-                'description' => 'Buku REST API Web Service v' . $i+1,
+                'description' => 'Buku REST API Web Service v' . $i,
                 'author' => 'Yuda Karnaen',
                 'publisher' => 'Bumigora',
                 'weight' => rand(0.5,1),
