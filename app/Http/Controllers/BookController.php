@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\Http\Resources\Book as BookResource;
 use App\Http\Resources\Books as BookResourceCollection;
 
 class BookController extends Controller
@@ -15,11 +16,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $criteria = Book::paginate(5);
-        return new BookResourceCollection($criteria);
+        $books = Book::paginate(10);
+        return new BookResourceCollection($books);
     }
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +29,9 @@ class BookController extends Controller
     public function search($keyword)
     {
         $criteria = Book::select('*')
-            ->where('title', 'LIKE', "%".$keyword."%")
+            ->where('title', 'LIKE', "%" . $keyword . "%")
             ->orderBy('views', 'DESC')
-            ->get();        
+            ->get();
         return new BookResourceCollection($criteria);
     }
 
@@ -41,7 +42,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -52,7 +53,21 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+            'author' => 'required',
+        ]);
+        $book = Book::create($request->all());
+        return (new BookResource($book))
+            ->response()
+            ->setStatusCode(201);
+    }
+
+    public function slug($slug)
+    {
+        $criteria = Book::where('slug', $slug)->first();
+        return new BookResource($criteria);
     }
 
     /**
@@ -63,7 +78,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        return new BookResource(Book::findOrFail($id));
     }
 
     /**
@@ -86,7 +101,16 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+            'author' => 'required',
+        ]);
+        $book = Book::find($id);
+        $book->update($request->all());
+        return (new BookResource($book))
+            ->response()
+            ->setStatusCode(200);
     }
 
     /**
@@ -97,6 +121,10 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book->delete($id);
+        return response()->json([
+            'message' => "Book deleted success with id=$id"
+        ]);
     }
 }

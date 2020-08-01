@@ -21,11 +21,9 @@ class CreateBooksTable extends Migration
             $table->string('author')->nullable();
             $table->string('publisher')->nullable();
             $table->string('cover')->nullable();
-            $table->float('price')->unsigned()->default(0);
             $table->float('weight')->unsigned()->default(0);
             $table->integer('views')->unsigned()->default(0);
-            $table->integer('stock')->unsigned()->default(1);
-            $table->enum('status', ['PUBLISH', 'DRAFT'])->default('PUBLISH');
+            $table->enum('status', ['AVAILABLE', 'BORROWED'])->default('AVAILABLE');
             $table->timestamps(); // created_at, updated_at
             $table->softDeletes(); // deleted_at
         });
