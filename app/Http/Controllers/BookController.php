@@ -14,12 +14,7 @@ class BookController extends Controller
         $books = Book::paginate(10);
         return new BookResourceCollection($books);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         //
