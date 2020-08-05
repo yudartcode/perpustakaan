@@ -33,12 +33,7 @@ class BookController extends Controller
             ->setStatusCode(201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         $book = Book::findOrFail($id);
