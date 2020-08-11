@@ -40,11 +40,6 @@ class BookController extends Controller
         return new BookResource($book);
     }
 
-    public function edit($id)
-    {
-        //
-    }
-
     public function update(Request $request, $id)
     {
         $request->validate([
