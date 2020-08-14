@@ -14,11 +14,6 @@ class BookController extends Controller
         $books = Book::paginate(10);
         return new BookResourceCollection($books);
     }
-    
-    public function create()
-    {
-        //
-    }
 
     public function store(Request $request)
     {
