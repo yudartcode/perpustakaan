@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 | API Route ¹
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
+| Here is where you can register API routes for your application.
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
