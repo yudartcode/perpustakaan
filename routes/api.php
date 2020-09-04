@@ -4,8 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
-| API Route 
-|------------
+| API Route
+|----------
 |
 | Here is where you can register API routes for your application.
 | routes are loaded by the RouteServiceProvider within a group
